@@ -19,9 +19,9 @@ public class GuestController {
     }
 
     @PostMapping
-    public void createGuest(@RequestBody Guest guest) {
+    public Guest createGuest(@RequestBody Guest guest) {
         guest.setGuestStatus(GuestStatus.REGISTERED);
-        guestRepository.save(guest);
+        return guestRepository.save(guest);
     }
 
     @PutMapping
@@ -30,7 +30,7 @@ public class GuestController {
         if (optGuest.isPresent()) {
             Guest guest = optGuest.get();
             guest.setGuestStatus(guestStatus);
-            guestRepository.save(guest);
+            return guestRepository.save(guest);
         }
         return null;
     }

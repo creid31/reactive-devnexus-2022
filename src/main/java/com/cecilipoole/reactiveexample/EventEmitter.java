@@ -38,7 +38,8 @@ public class EventEmitter {
 
     private Flux<RegistrantChange> loadCreates(Instant after) {
         logger.debug("Loading changes: creates");
-        return Flux.fromStream(guestRepository.findByCreatedAt(after).stream())
+        return Flux.fromStream(guestRepository.findByCreatedAt(after)
+                        .stream())
                 .map(guest -> new RegistrantChange(RegistrantStatus.CREATED,
                         guest.getId()));
     }
